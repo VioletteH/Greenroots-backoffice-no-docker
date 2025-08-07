@@ -1,0 +1,89 @@
+<%- include('../partials/header.ejs') %>
+
+<% if (error) { %>
+    <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<div class="container my-5">
+    <h1 class="mb-4">Détail de l'arbre</h1>
+
+    <!-- General informations -->
+    <div class="mb-4 p-3 border rounded bg-body-secondary">
+        <h5 class="mb-3">Informations générales</h5>
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <strong>Nom :</strong> <%= tree.name %>
+            </div>
+            <div class="col-md-6">
+                <strong>Nom scientifique :</strong> <%= tree.scientificName %>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <strong>Catégorie :</strong> <%= tree.category %>
+            </div>
+            <div class="col-md-6">
+                <strong>Prix :</strong> <%= tree.price %> €
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <strong>CO₂ absorbé :</strong> <%= tree.co2 %>
+            </div>
+            <div class="col-md-6">
+                <strong>O₂ créé :</strong> <%= tree.o2 %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <strong>Description :</strong>
+                <p class="mt-1 mb-0"><%= tree.description %></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image -->
+    <% if (tree.image) { %>
+        <div class="mb-4 p-3 border rounded bg-white">
+            <h5 class="mb-3">Image</h5>
+            <img src="<%= tree.image %>" class="img-fluid rounded border" style="max-width: 300px;">
+        </div>
+    <% } %>
+
+    <!-- Associated Forests -->
+    <div class="mb-4">
+        <h5>Forêts associées</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>Nom de la forêt</th>
+                        <th>Restant à planter</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (tree.forestname && Array.isArray(tree.forestname) && tree.stock && Array.isArray(tree.stock) && tree.forestname.length > 0) { %>
+                        <% for (let i = 0; i < tree.forestname.length; i++){ %>
+                          <tr>
+                            <td><%= tree.forestname[i] %></td>
+                            <td><%= tree.stock[i] %></td>
+                          </tr>
+                        <% } %>
+                      <% } else { %>
+                        <tr>
+                          <td colspan="2" class="text-center text-muted">Aucune forêt associée</td>
+                        </tr>
+                      <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="mt-4 d-flex gap-2">
+        <a href="/trees" class="btn btn-outline-secondary">← Retour à la liste</a>
+        <a href="/trees/<%= tree.id %>/edit" class="btn btn-warning">Modifier l'arbre</a>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

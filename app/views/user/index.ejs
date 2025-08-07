@@ -1,0 +1,47 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0">Liste des utilisateurs</h1>
+    <a href="/users/add" class="btn btn-primary">Ajouter un utilisateur</a>
+  </div>
+
+  <% if (users.length === 0) { %>
+    <div class="alert alert-info">Aucun utilisateur enregistré.</div>
+  <% } else { %>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <% users.forEach(user => { %>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="card-title mb-0"><%= user.firstname %> <%= user.lastname %></h5>
+                <% if (user.role === 'admin') { %>
+                  <span class="badge bg-danger d-flex align-items-center">
+                    <i class="bi bi-shield me-1"></i> Admin
+                  </span>
+                <% } else { %>
+                  <span class="badge bg-secondary d-flex align-items-center">
+                    <i class="bi bi-person-fill me-1"></i> Utilisateur
+                  </span>
+                <% } %>
+              </div>
+              <p class="mb-0"><strong>Email :</strong> <%= user.email %></p>
+            </div>
+            <div class="card-footer bg-white d-flex justify-content-around gap-1">
+              <a href="/users/<%= user.id %>" class="btn btn-outline-info btn-sm">Voir</a>
+              <a href="/users/<%= user.id %>/edit" class="btn btn-outline-warning btn-sm">Modifier</a>
+              <form action="/users/<%= user.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Supprimer cet utilisateur ?')" class="d-inline">
+                <button type="submit" class="btn btn-outline-danger btn-sm">Supprimer</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <%- include('../partials/pagination.ejs') %>
+</div>
+
+<%- include('../partials/footer.ejs') %>

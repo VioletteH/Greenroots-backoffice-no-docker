@@ -1,0 +1,47 @@
+<%- include('../partials/header.ejs') %>
+
+<% if (error) { %>
+    <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<div class="container my-5">
+    <h1 class="mb-4">Détail de l'utilisateur</h1>
+
+    <div class="p-3 border rounded bg-body-secondary">
+        <h5 class="mb-3">Informations personnelles</h5>
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <strong>Nom :</strong> <%= user.lastname %>
+            </div>
+            <div class="col-md-6">
+                <strong>Prénom :</strong> <%= user.firstname %>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <strong>Email :</strong> <%= user.email %>
+            </div>
+            <div class="col-md-6">
+                <strong>Téléphone :</strong> <%= user.phone %>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-12">
+                <strong>Adresse :</strong> <%= user.address %>, <%= user.zipcode %> <%= user.city %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Rôle :</strong> <%= user.role %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="mt-4 d-flex gap-2">
+        <a href="/users" class="btn btn-outline-secondary">← Retour à la liste</a>
+        <a href="/users/<%= user.id %>/edit" class="btn btn-warning">Modifier l'utilisateur</a>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

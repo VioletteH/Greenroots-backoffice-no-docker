@@ -1,0 +1,23 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="text-dark">
+    <div class="d-flex align-items-center justify-content-center min-vh-90 px-2">
+        <div class="text-center">
+            <h1 class="display-1 fw-bold">400</h1>
+            <p class="fs-2 fw-medium mt-4">Mauvaise requête</p>
+            <p class="mt-4 mb-5">
+                La requête envoyée au serveur est invalide. Vérifiez les données envoyées ou contactez l'administrateur.
+            </p>
+            <% if (error) { %>
+                <div class="alert alert-danger mt-4">
+                    <strong>Détails de l'erreur :</strong> <%= error.message %>
+                </div>
+            <% } %>
+            <a href="/" class="btn btn-light fw-semibold rounded-pill px-4 py-2">
+                Retour à l’accueil
+            </a>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

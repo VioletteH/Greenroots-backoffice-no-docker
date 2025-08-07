@@ -1,0 +1,78 @@
+<%- include('../partials/header.ejs') %>
+
+<h1>Nouvel arbre</h1>
+
+<form action="/trees/add" method="POST" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label class="form-label">Nom</label>
+    <input type="text" name="name" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Nom scientifique</label>
+    <input type="text" name="scientific_name" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Categorie</label>
+    <input type="text" name="category" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <textarea name="description" class="form-control"></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Image</label>
+    <input type="file" name="image" class="form-control" accept="image/*" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">CO2</label>
+    <input type="number" name="co2" class="form-control" step="1">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">O2</label>
+    <input type="number" name="o2" class="form-control" step="1">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Prix</label>
+    <input type="number" name="price" class="form-control" step="0.01">
+  </div>
+
+  <div class="mb-4">
+    <label class="form-label d-block mb-2 fw-bold text-center">Associer à une ou plusieurs forêts</label>
+  
+    <div class="row g-2">
+      <% forests.forEach(forest => { %>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="border rounded p-2 bg-light h-100 shadow-sm small-card">
+            <div class="form-check mb-1">
+              <input 
+                type="checkbox" 
+                name="forestAssociations[<%= forest.id %>][checked]" 
+                value="true" 
+                class="form-check-input" 
+                id="forest-<%= forest.id %>"
+              >
+              <label for="forest-<%= forest.id %>" class="form-check-label fw-semibold">
+                <%= forest.name %>
+              </label>
+            </div>
+            
+            <div class="d-flex align-items-center gap-2">
+              <label for="stock-<%= forest.id %>" class="form-label m-0 small text-muted">Stock</label>
+              <input 
+                type="number" 
+                name="forestAssociations[<%= forest.id %>][stock]" 
+                class="form-control form-control-sm" 
+                id="stock-<%= forest.id %>" 
+                min="1"
+              >
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>  
+  
+  <button type="submit" class="btn btn-success">Créer</button>
+</form>
+
+<%- include('../partials/footer.ejs') %>

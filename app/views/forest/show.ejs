@@ -1,0 +1,81 @@
+<%- include('../partials/header.ejs') %>
+
+<% if (error) { %>
+    <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<div class="container my-5">
+    <h1 class="mb-4">Détail de la forêt</h1>
+
+    <!-- General informations -->
+    <div class="mb-4 p-3 border rounded bg-body-secondary">
+        <h5 class="mb-3">Informations générales</h5>
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <strong>Nom :</strong> <%= forest.name %>
+            </div>
+            <div class="col-md-6">
+                <strong>Association :</strong> <%= forest.association %>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <strong>Pays :</strong> <%= forest.country %>
+            </div>
+            <div class="col-md-6">
+                <strong>Coordonnées :</strong> X: <%= forest.locationX %>, Y: <%= forest.locationY %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <strong>Description :</strong>
+                <p class="mt-1 mb-0"><%= forest.description %></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image -->
+    <% if (forest.image) { %>
+        <div class="mb-4 p-3 border rounded bg-white">
+            <h5 class="mb-3">Image</h5>
+            <img src="<%= forest.image %>" class="img-fluid rounded border" style="max-width: 300px;">
+        </div>
+    <% } %>
+
+    <!-- Associated trees -->
+    <div class="mb-4">
+        <h5>Arbres associés</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>Nom de l'arbre</th>
+                        <th>Restant à planter</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (forest.treesname && forest.treesname.length > 0) { %>
+                        <% for (let i = 0; i < forest.treesname.length; i++) { %>
+                            <tr>
+                                <td><%= forest.treesname[i] %></td>
+                                <td><%= forest.stock[i] %></td>
+                            </tr>
+                        <% } %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="2" class="text-center text-muted">Aucun arbre associé</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="mt-4 d-flex gap-2">
+        <a href="/forests" class="btn btn-outline-secondary">← Retour à la liste</a>
+        <a href="/forests/<%= forest.id %>/edit" class="btn btn-warning">Modifier la forêt</a>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

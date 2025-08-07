@@ -1,0 +1,26 @@
+<%- include('../partials/header.ejs') %>
+
+<h1>Modifier la commande numéro <%= order.id %></h1>
+
+<form method="POST" action="/orders/<%= order.id %>?_method=PATCH">
+  <div class="mb-3">
+    <label class="form-label">Email du client</label>
+    <input type="text" name="customerName" value="<%= order.user.email %>" class="form-control" disabled>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Prix total</label>
+    <input type="text" name="totalPrice" value="<%= order.totalPrice %>" class="form-control" disabled>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Statut</label>
+    <select name="status" class="form-select">
+      <option value=1 <%= order.status === 1 ? 'selected' : '' %>>En cours</option>
+      <option value=2 <%= order.status === 2 ? 'selected' : '' %>>Terminée</option>
+      <option value=3 <%= order.status === 3 ? 'selected' : '' %>>Annulée</option>
+    </select>  
+  </div>
+
+  <button type="submit" class="btn btn-primary">Mettre à jour</button>
+</form>
+
+<%- include('../partials/footer.ejs') %>

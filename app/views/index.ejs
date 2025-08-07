@@ -1,0 +1,51 @@
+<%- include('./partials/header.ejs') %>
+
+<h1 class="text-center mb-4">Bienvenue dans le backoffice de GreenRoots</h1>
+
+<div class="row g-4">
+  <!-- Card Forêts -->
+  <div class="col-md-4">
+    <div class="card border-success shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Forêts</h5>
+        <p class="card-text">Gérez les forêts, leurs descriptions, localisations, et associations.</p>
+        <a href="/forests" class="btn btn-success">Voir les forêts</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card Arbres -->
+  <div class="col-md-4">
+    <div class="card border-primary shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Arbres</h5>
+        <p class="card-text">Administrez les arbres, leur nom scientifique, leur stock, et plus encore.</p>
+        <a href="/trees" class="btn btn-primary">Voir les arbres</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card Commandes -->
+  <div class="col-md-4">
+    <div class="card border-warning shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Commandes</h5>
+        <p class="card-text">Consultez les commandes passées, leurs statuts et les articles associés.</p>
+        <a href="/orders" class="btn btn-warning">Voir les commandes</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card Utilisateurs -->
+  <div class="col-md-4">
+    <div class="card border-dark shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Utilisateurs</h5>
+        <p class="card-text">Gérez les comptes utilisateurs et leurs rôles.</p>
+        <a href="/users" class="btn btn-dark">Voir les utilisateurs</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('./partials/footer.ejs') %>

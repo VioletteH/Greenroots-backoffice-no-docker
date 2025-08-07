@@ -1,0 +1,75 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="container my-5">
+    <h1 class="mb-4">Détail de la commande</h1>
+
+    <!-- User informations -->
+    <div class="mb-4 p-3 border rounded bg-body-secondary">
+        <h5 class="mb-3">Informations utilisateur</h5>
+        <div class="row">
+            <div class="col-md-4">
+                <strong>Nom :</strong> <%= order.user.lastname %>
+            </div>
+            <div class="col-md-4">
+                <strong>Prénom :</strong> <%= order.user.firstname %>
+            </div>
+            <div class="col-md-4">
+                <strong>Email :</strong> <%= order.user.email %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order informations -->
+    <div class="mb-4 p-3 border rounded bg-white">
+        <h5 class="mb-3">Commande #<%= order.id %></h5>
+        <div class="row">
+            <div class="col-md-4">
+                <strong>Statut :</strong> <%= order.statusLabel %>
+            </div>
+            <div class="col-md-4">
+                <strong>Créée le :</strong> <%= order.createdAtFormatted %>
+            </div>
+            <div class="col-md-4">
+                <strong>Dernière mise à jour :</strong> <%= order.updatedAtFormatted %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products table -->
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+            <thead class="table-secondary">
+                <tr>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% order.items.forEach(item => { %>
+                    <tr>
+                        <td><%= item.name %></td>
+                        <td><%= item.quantity %></td>
+                        <td><%= item.price %> €</td>
+                        <td><%= (item.quantity * item.price) %> €</td>
+                    </tr>
+                <% }) %>
+            </tbody>
+            <tfoot>
+                <tr class="table-light fw-bold">
+                    <td colspan="3" class="text-end">Total de la commande</td>
+                    <td><%= order.totalPrice %> €</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <!-- Actions -->
+    <div class="mt-4 d-flex gap-2">
+        <a href="/orders" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Retour à la liste</a>
+        <a href="/orders/<%= order.id %>/edit" class="btn btn-warning">Modifier la commande</a>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

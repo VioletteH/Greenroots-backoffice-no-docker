@@ -1,0 +1,46 @@
+{
+  "name": "back-office",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.ts",
+  "scripts": {
+    "start": "ts-node app.ts",
+    "dev": "nodemon -L app.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.6.4",
+  "dependencies": {
+    "axios": "^1.8.4",
+    "bootstrap-icons": "^1.11.3",
+    "cookie": "^1.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "date-fns": "4.1.0",
+    "dompurify": "^3.2.6",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "helmet": "^8.1.0",
+    "method-override": "^3.0.0",
+    "multer": "1.4.5-lts.2",
+    "node-fetch": "^3.3.2",
+    "pg": "^8.13.1",
+    "sanitize-html": "^2.16.0"
+  },
+  "devDependencies": {
+    "@types/cookie": "^1.0.0",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/date-fns": "^2.6.3",
+    "@types/express": "^5.0.1",
+    "@types/method-override": "^3.0.0",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^22.14.0",
+    "@types/sanitize-html": "^2.15.0",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}

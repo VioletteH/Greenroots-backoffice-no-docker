@@ -1,0 +1,44 @@
+<%- include('../partials/header.ejs') %>
+
+<h1>Modifier l'utilisateur "<%= user.email %>"</h1>
+
+<form method="POST" action="/users/<%= user.id %>?_method=PATCH">
+  <div class="mb-3">
+    <label class="form-label">Nom</label>
+    <input type="text" name="lastname" value="<%= user.lastname %>" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Prénom</label>
+    <input type="text" name="firstname" value="<%= user.firstname %>" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input type="text" name="email" value="<%= user.email %>" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Numéro de téléphone</label>
+    <input type="text" name="phone" value="<%= user.phone %>" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Adresse</label>
+    <input type="text" name="address" value="<%= user.address %>" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Code Postal</label>
+    <input type="text" name="zipcode" value="<%= user.zipcode %>" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Ville</label>
+    <input type="text" name="city" value="<%= user.city %>" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Rôle</label>
+    <select name="role" class="form-control">
+      <option value="user" <% if (user.role === 'user') { %> selected <% } %>>Utilisateur</option>
+      <option value="admin" <% if (user.role === 'admin') { %> selected <% } %>>Administrateur</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Mettre à jour</button>
+</form>
+
+<%- include('../partials/footer.ejs') %>

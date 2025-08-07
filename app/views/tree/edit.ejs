@@ -1,0 +1,91 @@
+<%- include('../partials/header.ejs') %>
+
+<h1>Modifier l'arbre "<%= tree.name %>"</h1>
+
+<form method="POST" action="/trees/<%= tree.id %>?_method=PATCH" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label class="form-label">Nom</label>
+    <input type="text" name="name" value="<%= tree.name %>" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Nom scientifique</label>
+    <input type="text" name="scientific_name" value="<%= tree.scientificName %>" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Catégorie</label>
+    <input type="text" name="category" value="<%= tree.category %>" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <textarea name="description" class="form-control"><%= tree.description %></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Image</label>
+    <input type="file" name="image" class="form-control" accept="image/*">
+    <div>
+      <p>Image actuelle :</p>
+      <img src="<%= tree.image %>" alt="Image actuelle" style="max-width: 200px;">
+    </div>
+  </div>
+
+  <input type="hidden" name="oldImage" value="<%= tree.image %>">
+
+  <div class="mb-3">
+    <label class="form-label">CO2</label>
+    <input type="number" name="co2" value="<%= tree.co2 %>" class="form-control" step="1">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">O2</label>
+    <input type="number" name="o2" value="<%= tree.o2 %>" class="form-control" step="1">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Prix</label>
+    <input type="number" name="price" value="<%= tree.price %>" class="form-control" step="0.01">
+  </div>
+
+  <div class="mb-4">
+    <label class="form-label d-block mb-2 fw-bold">Associer à une ou plusieurs forêts</label>
+
+    <div class="row g-2">
+      <% forests.forEach(forest => {
+        const index = tree.forestname.indexOf(forest.name);
+        const isChecked = index !== -1;
+        const stockValue = isChecked ? tree.stock[index] : '';
+        %>
+      
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="border rounded p-2 bg-light h-100 shadow-sm small-card">
+            <div class="form-check mb-2">
+              <input 
+                type="checkbox" 
+                name="forestAssociations[<%= forest.id %>][checked]" 
+                value="true" 
+                class="form-check-input" 
+                id="forest-<%= forest.id %>" 
+                <%= isChecked ? 'checked' : '' %>
+              >
+              <label for="forest-<%= forest.id %>" class="form-check-label fw-semibold">
+                <%= forest.name %>
+              </label>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <label for="stock-<%= forest.id %>" class="form-label m-0 small text-muted">Stock</label>
+              <input 
+                type="number" 
+                name="forestAssociations[<%= forest.id %>][stock]" 
+                class="form-control form-control-sm" 
+                id="stock-<%= forest.id %>" 
+                min="1"
+                value="<%= stockValue %>"
+              >
+            </div>
+          </div>
+        </div>
+        <% }) %>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Mettre à jour</button>
+</form>
+
+<%- include('../partials/footer.ejs') %>

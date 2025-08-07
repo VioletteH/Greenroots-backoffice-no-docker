@@ -1,0 +1,42 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0">Liste des arbres</h1>
+    <a href="/trees/add" class="btn btn-primary">Ajouter un arbre</a>
+  </div>
+
+  <% if (trees.length === 0) { %>
+    <div class="alert alert-info">Aucun arbre enregistré pour le moment.</div>
+  <% } else { %>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <% trees.forEach(tree => { %>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <% if (tree.image) { %>
+              <img src="<%= tree.image %>" class="card-img-top" alt="<%= tree.name %>" style="object-fit: cover; height: 180px;">
+            <% } %>
+            <div class="card-body">
+              <h5 class="card-title"><%= tree.name %></h5>
+              <p class="mb-1"><strong>Catégorie :</strong> <%= tree.category %></p>
+              <p class="mb-1"><strong>CO₂ absorbé :</strong> <%= tree.co2 %> kg/an</p>
+              <p class="mb-1"><strong>O₂ produit :</strong> <%= tree.o2 %> kg/an</p>
+              <p class="mb-1"><strong>Prix :</strong> <%= tree.price %> €</p>
+            </div>
+            <div class="card-footer bg-white d-flex justify-content-around gap-1">
+              <a href="/trees/<%= tree.id %>" class="btn btn-outline-info btn-sm">Voir</a>
+              <a href="/trees/<%= tree.id %>/edit" class="btn btn-outline-warning btn-sm">Modifier</a>
+              <form action="/trees/<%= tree.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Supprimer cet arbre ?')">
+                <button type="submit" class="btn btn-outline-danger btn-sm">Supprimer</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <%- include('../partials/pagination.ejs') %>
+</div>
+
+<%- include('../partials/footer.ejs') %>
