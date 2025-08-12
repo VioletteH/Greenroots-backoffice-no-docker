@@ -10,7 +10,6 @@ import { errorHandler } from './app/middleware/errorHandler';
 import helmet from 'helmet';
 
 const app = express();
-app.use(cors());
 
 const allowedOrigins = [
   process.env.FRONTA,
